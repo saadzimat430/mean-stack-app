@@ -28,6 +28,7 @@ const routes: Routes = [
     FriendsComponent
   ],
   imports: [
+    RouterModule,
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(routes),

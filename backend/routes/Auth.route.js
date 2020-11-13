@@ -63,7 +63,12 @@ authRoute.post(
 
             const payload = {
                 marsupilami: {
-                    id: marsupilami.id
+                    id: marsupilami.id,
+                    login: marsupilami.login,
+                    age: marsupilami.age,
+                    famille: marsupilami.famille,
+                    race: marsupilami.race,
+                    nourriture: marsupilami.nourriture
                 }
             };
 
@@ -125,7 +130,12 @@ authRoute.post(
 
             const payload = {
                 marsupilami: {
-                    id: marsupilami.id
+                    id: marsupilami.id,
+                    login: marsupilami.login,
+                    age: marsupilami.age,
+                    famille: marsupilami.famille,
+                    race: marsupilami.race,
+                    nourriture: marsupilami.nourriture
                 }
             };
 

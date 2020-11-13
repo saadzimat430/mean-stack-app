@@ -1,1 +1,34 @@
-<p>login works!</p>
+<div class="row justify-content-center" id="registerForm">
+    <div class="col-md-4 register-employee" style="margin-top: 200px;">
+      <!-- form card register -->
+      <div class="card-body">
+        <form [formGroup]="marsuForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label id="formlabel" for="inputName">Login</label>
+            <input class="form-control" type="text" formControlName="login">
+            <!-- error -->
+            <div class="invalid-feedback" *ngIf="submitted && myForm.login.errors?.required">
+              Login is required.
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label id="formlabel" for="inputEmail3">Mot de passe</label>
+            <input class="form-control" type="password" formControlName="password">
+            <!-- error -->
+            <div class="invalid-feedback" *ngIf="submitted && myForm.password.errors?.required">
+              Password is required.
+            </div>
+            <div class="invalid-feedback" *ngIf="submitted && myForm.password.errors?.minLength">
+              Minimum length is 6
+            </div>
+          </div>
+  
+          <button class="buttonx" type="submit">Login</button>
+          <button routerLink="/register" class="buttonx" type="submit">Sign Up</button>
+        </form>
+  
+      </div>
+    </div><!-- form card register -->
+  </div>
+  

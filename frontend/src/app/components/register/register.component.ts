@@ -1,7 +1,6 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/services/api.service';
 import { AuthenticationService, TokenPayload } from 'src/app/services/authentication.service';
 
 @Component({
@@ -71,27 +70,11 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    this.auth.register(this.credentials).subscribe(() => {
-      this.router.navigateByUrl('/me');
+    this.auth.register(this.marsuForm.value).subscribe(() => {
+      this.router.navigateByUrl('/login');
     }, (err) => {
       console.error(err);
     });
   }
-
-  /* onSubmit() {
-    this.submitted = true;
-    console.log(this.marsuForm.value);
-    if (!this.marsuForm.valid) {
-      return false;
-    } else {
-      this.apiService.createMarsupilami(this.marsuForm.value).subscribe(
-        (res) => {
-          console.log('Employee successfully created!')
-          this.ngZone.run(() => this.router.navigateByUrl('/'))
-        }, (error) => {
-          console.log(error);
-        });
-    }
-  } */
 
 }

@@ -3,13 +3,20 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Marsupilami } from '../common/marsupilami';
 
 export interface MarsuDetails {
   _id: string;
-  email: string;
-  name: string;
   exp: number;
   iat: number;
+  login: string;
+  password: string;
+  age?: number;
+  famille?: string;
+  race?: string;
+  nourriture?: string;
+  dateCreation?: Date;
+  marsupilami: Marsupilami;
 }
 
 interface TokenResponse {
@@ -19,10 +26,10 @@ interface TokenResponse {
 export interface TokenPayload {
   login: string;
   password: string;
-  age?: number;
-  famille?: string;
-  race?: string;
-  nourriture?: string;
+  age: number;
+  famille: string;
+  race: string;
+  nourriture: string;
   dateCreation?: Date;
 }
 
@@ -68,6 +75,7 @@ export class AuthenticationService {
   public isLoggedIn(): boolean {
     const marsu = this.getMarsuDetails();
     if (marsu) {
+      // marsu.exp = NumericDate from 1970-01-01 to now
       return marsu.exp > Date.now() / 1000;
     } else {
       return false;

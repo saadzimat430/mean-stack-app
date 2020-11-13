@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService, MarsuDetails } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-me',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MeComponent implements OnInit {
 
-  constructor() { }
+  details: MarsuDetails;
+
+  constructor(public auth: AuthenticationService) { };
+
+  details = this.auth.getMarsuDetails();
 
   ngOnInit(): void {
+    console.log(this.details);
   }
 
 }
