@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik:500');
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Rubik', sans-serif;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.buttonx {
+  padding: 16px 42px;
+  box-shadow: 0px 0px 12px -2px rgba(0, 0, 0, 0.5);
+  line-height: 1.25;
+  background: #FC6E51;
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  position: relative;
+  transition: background-color .6s ease;
+  overflow: hidden;
+  max-width: 220px;
+  display: flex;
+  white-space: nowrap;
+
+  &:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 50%;
+    left: 50%;
+    transform-style: flat;
+    transform: translate3d(-50%, -50%, 0);
+    background: rgba(white, .1);
+    border-radius: 100%;
+    transition: width .3s ease, height .3s ease;
+  }
+
+  &:focus,
+  &:hover {
+    background: darken(#FC6E51, 7%);
+  }
+
+  &:active {
+    &:after {
+      width: 200px;
+      height: 200px;
+    }
+  }
+}
