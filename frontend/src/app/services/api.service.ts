@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class ApiService {
   baseUri: string = 'http://localhost:4000/api';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private auth: AuthenticationService) { }
 
   // Create
   createMarsupilami(data): Observable<any> {
@@ -51,6 +53,14 @@ export class ApiService {
   deleteMarsupilami(id): Observable<any> {
     let url = `${this.baseUri}/delete/${id}`;
     return this.http.delete(url, { headers: this.headers }).pipe(
+      catchError(this.errorMgmt)
+    )
+  }
+
+  addFriend(id): Observable<any> {
+    console.log("Trying to add friend...");
+    let url = `${this.baseUri}/addfriend/${this.auth.getMarsuDetails().marsupilami.id}}`;
+    return this.http.put(url, {id: id}).pipe(
       catchError(this.errorMgmt)
     )
   }

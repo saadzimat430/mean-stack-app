@@ -26,15 +26,16 @@
             <th scope="col center">Ajouter ami</th>
           </tr>
         </thead>
-        <tbody>
-          <tr *ngFor="let friend of Friends; let i = index">
+        <tbody *ngFor="let friend of Friends; let i = index">
+          <tr *ngIf="friend._id != details.marsupilami.id">
             <th scope="row">{{friend.login}}</th>
             <td>{{friend.age != undefined ? friend.age : "N/A"}}</td>
             <td>{{friend.famille != undefined ? friend.famille : "N/A"}}</td>
             <td>{{friend.race != undefined ? friend.race : "N/A"}}</td>
             <td class="text-center edit-block">
-              <span class="edit" [routerLink]="['/edit-friend/', friend._id]">
-                <button type="button" class="btn btn-success btn-sm">Ajouter ami</button>
+              <span class="edit">
+                <button type="button" class="btn btn-success btn-sm" (click)="apiService.addFriend(friend._id)">Ajouter
+                  ami</button>
               </span>
               &nbsp;
             </td>

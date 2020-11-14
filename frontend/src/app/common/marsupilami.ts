@@ -1,4 +1,5 @@
 export class Marsupilami {
+    id: string;
     login: string;
     password: string;
     age: number;

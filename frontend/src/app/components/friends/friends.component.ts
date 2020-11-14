@@ -13,7 +13,7 @@ export class FriendsComponent implements OnInit {
 
   Friends: any = [];
 
-  constructor(private apiService: ApiService,
+  constructor(public apiService: ApiService,
     public auth: AuthenticationService) {
     this.readFriends();
   }
