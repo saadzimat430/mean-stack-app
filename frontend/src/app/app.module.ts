@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from './services/authentication.service';
+import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
   { path: 'friends', component: FriendsComponent },
@@ -33,7 +34,8 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent]

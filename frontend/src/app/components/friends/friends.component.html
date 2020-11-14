@@ -1,1 +1,46 @@
-<p>friends works!</p>
+<div class="container" id="registerForm">
+  <div class="row justify-content-center">
+    <div class="topright" *ngIf="auth.isLoggedIn()">
+      <img class="profileImg" src="https://cdn140.picsart.com/239055468014202.jpg?type=webp&to=crop&r=256">
+      <br>
+      <div class="dropdown">{{ details.marsupilami.login }}
+        <div class="dropdown-content">
+          <a routerLinkActive="active" (click)="auth.logout()">
+            <p>Logout</p>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="contenaire">
+      <!-- No data message -->
+      <p *ngIf="Friends.length <= 0" class="no-data text-center">There is no friend added yet!</p>
+
+      <table class="table table-bordered" *ngIf="Friends.length > 0" style="background-color: white;">
+        <thead class="table-success">
+          <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Age</th>
+            <th scope="col">Famille</th>
+            <th scope="col">Race</th>
+            <th scope="col center">Ajouter ami</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let friend of Friends; let i = index">
+            <th scope="row">{{friend.login}}</th>
+            <td>{{friend.age != undefined ? friend.age : "N/A"}}</td>
+            <td>{{friend.famille != undefined ? friend.famille : "N/A"}}</td>
+            <td>{{friend.race != undefined ? friend.race : "N/A"}}</td>
+            <td class="text-center edit-block">
+              <span class="edit" [routerLink]="['/edit-friend/', friend._id]">
+                <button type="button" class="btn btn-success btn-sm">Ajouter ami</button>
+              </span>
+              &nbsp;
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
