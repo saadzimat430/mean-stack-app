@@ -16,6 +16,8 @@ export class ApiService {
   constructor(private http: HttpClient,
     private auth: AuthenticationService) { }
 
+  marsu = this.auth.getMarsuDetails().marsupilami;
+
   // Create
   createMarsupilami(data): Observable<any> {
     let url = `${this.baseUri}/create`;
@@ -57,12 +59,14 @@ export class ApiService {
     )
   }
 
-  addFriend(id): Observable<any> {
+  addFriend(data): Observable<any> {
     console.log("Trying to add friend...");
-    let url = `${this.baseUri}/addfriend/${this.auth.getMarsuDetails().marsupilami.id}}`;
-    return this.http.put(url, {id: id}).pipe(
+    console.log(`Online user ID is ${this.marsu.id}`);
+
+    let url = `${this.baseUri}/addfriend/${this.marsu.id}`;
+    return this.http.put(url, data, { headers: this.headers }).pipe(
       catchError(this.errorMgmt)
-    )
+    );
   }
 
   // Error handling 
