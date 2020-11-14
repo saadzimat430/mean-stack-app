@@ -25,7 +25,10 @@ let Marsupilami = new Schema({
     dateCreation: {
         type: Date,
         default: Date.now()
-    }
+    },
+    friends: [
+        {type: Schema.Types.ObjectId, ref: 'Marsupilami'}
+    ]
 }, {
     collection: 'marsupilamis'
 })

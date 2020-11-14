@@ -16,7 +16,7 @@ export interface MarsuDetails {
   race?: string;
   nourriture?: string;
   dateCreation?: Date;
-  marsupilami: Marsupilami;
+  marsupilami?: Marsupilami;
 }
 
 interface TokenResponse {

@@ -1,7 +1,8 @@
 const express = require('express');
-const app = express();
 const marsupilamiRoute = express.Router();
 const auth = require('../middleware/Auth');
+const db = require('../db/db');
+const mongoose = require('mongoose');
 
 let Marsupilami = require('../models/Marsupilami');
 
@@ -45,6 +46,17 @@ marsupilamiRoute.route('/update/:id').put((req, res, next) => {
             res.json(data)
         }
     })
+})
+
+marsupilamiRoute.route('/addfriend/:id').put(async (req, res, next) => {
+    const marsu = await Marsupilami.findById(req.params.id);
+
+    friend = await Marsupilami.findById(req.body.id);
+
+    marsu.friends.push(friend);
+    await marsu.save();
+
+    return res.send(marsu);
 })
 
 marsupilamiRoute.route('/delete/:id').delete((req, res, next) => {
