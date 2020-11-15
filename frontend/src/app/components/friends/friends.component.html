@@ -1,47 +1,78 @@
-<div class="container" id="registerForm">
-  <div class="row justify-content-center">
-    <div class="topright" *ngIf="auth.isLoggedIn()">
-      <img class="profileImg" src="https://cdn140.picsart.com/239055468014202.jpg?type=webp&to=crop&r=256">
-      <br>
-      <div class="dropdown">{{ details.marsupilami.login }}
-        <div class="dropdown-content">
-          <a routerLinkActive="active" (click)="auth.logout()">
-            <p>Logout</p>
-          </a>
-        </div>
+<div class="container" id="registerForm" style="overflow: auto;">
+  <div class="topright" *ngIf="auth.isLoggedIn()">
+    <img class="profileImg" src="https://cdn140.picsart.com/239055468014202.jpg?type=webp&to=crop&r=256">
+    <br>
+    <div class="dropdown">{{ details.marsupilami.login }}
+      <div class="dropdown-content">
+        <a routerLinkActive="active" (click)="auth.logout()">
+          <p>Logout</p>
+        </a>
       </div>
     </div>
-
-    <div class="contenaire">
-      <!-- No data message -->
-      <p *ngIf="Friends.length <= 0" class="no-data text-center">There is no friend added yet!</p>
-
-      <table class="table table-bordered" *ngIf="Friends.length > 0" style="background-color: white;">
-        <thead class="table-success">
-          <tr>
-            <th scope="col">Nom</th>
-            <th scope="col">Age</th>
-            <th scope="col">Famille</th>
-            <th scope="col">Race</th>
-            <th scope="col center">Ajouter ami</th>
-          </tr>
-        </thead>
-        <tbody *ngFor="let friend of Friends; let i = index">
-          <tr *ngIf="friend._id != details.marsupilami.id">
-            <th scope="row">{{friend.login}}</th>
-            <td>{{friend.age != undefined ? friend.age : "N/A"}}</td>
-            <td>{{friend.famille != undefined ? friend.famille : "N/A"}}</td>
-            <td>{{friend.race != undefined ? friend.race : "N/A"}}</td>
-            <td class="text-center edit-block">
-              <span class="edit">
-                <button type="button" class="btn btn-success btn-sm" (click)="addFriend(friend._id)">Ajouter
-                  ami</button>
-              </span>
-              &nbsp;
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
   </div>
+
+  <div class="contenaire">
+    <!-- No data message -->
+    <p *ngIf="Marsupilamis.length <= 0" class="no-data text-center">Aucun marsupilami inscrit encore !</p>
+    <h2 style="color: white; text-align: center;">Liste des marsupilamis inscrits</h2>
+    <table class="table table-bordered" *ngIf="Marsupilamis.length > 0" style="background-color: white;">
+      <thead class="table-success">
+        <tr>
+          <th scope="col">Nom</th>
+          <th scope="col">Age</th>
+          <th scope="col">Famille</th>
+          <th scope="col">Race</th>
+          <th scope="col center">Ajouter ami</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let friend of Marsupilamis; let i = index">
+        <tr *ngIf="friend._id != details.marsupilami.id">
+          <th scope="row">{{friend.login}}</th>
+          <td>{{friend.age != undefined ? friend.age : "N/A"}}</td>
+          <td>{{friend.famille != undefined ? friend.famille : "N/A"}}</td>
+          <td>{{friend.race != undefined ? friend.race : "N/A"}}</td>
+          <td class="text-center edit-block">
+            <span class="edit">
+              <button type="button" class="btn btn-success btn-sm" (click)="addFriend(friend._id)">Ajouter
+                ami</button>
+            </span>
+            &nbsp;
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="contenaire">
+    <p *ngIf="Friends.length <= 0" class="alert alert-warning text-center" style="width: 50%; margin: auto;">Vous n'avez aucun ami !</p>
+    <br>
+    <h2 *ngIf="Friends.length > 0" style="color: white; text-align: center;">Liste des amis</h2>
+    <table class="table table-bordered" *ngIf="Friends.length > 0" style="background-color: white;">
+      <thead class="table-success">
+        <tr>
+          <th scope="col">Nom</th>
+          <th scope="col">Age</th>
+          <th scope="col">Famille</th>
+          <th scope="col">Race</th>
+          <th scope="col center">Supprimer ami</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let friend of Friends; let i = index">
+        <tr *ngIf="friend._id != details.marsupilami.id">
+          <th scope="row">{{friend.login}}</th>
+          <td>{{friend.age != undefined ? friend.age : "N/A"}}</td>
+          <td>{{friend.famille != undefined ? friend.famille : "N/A"}}</td>
+          <td>{{friend.race != undefined ? friend.race : "N/A"}}</td>
+          <td class="text-center edit-block">
+            <span class="edit">
+              <button type="button" class="btn btn-danger btn-sm" (click)="removeFriend(friend.id)">Supprimer
+                ami</button>
+            </span>
+            &nbsp;
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </div>

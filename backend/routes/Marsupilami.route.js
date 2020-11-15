@@ -75,6 +75,7 @@ marsupilamiRoute.route('/getfriends/:id').get(async (req, res) => {
     for (let i = 0; i < marsu.friends.length; i++) {
         let marsu_ = await Marsupilami.findById(marsu.friends[i]);
         data = {
+            id: marsu_._id,
             login: marsu_.login,
             race: marsu_.race,
             famille: marsu_.famille,

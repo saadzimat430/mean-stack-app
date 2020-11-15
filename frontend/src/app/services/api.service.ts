@@ -33,7 +33,7 @@ export class ApiService {
   }
 
   // Get Marsupilami
-  getMarsupilami(id): Observable<any> {
+  getMarsupilami(id: string): Observable<any> {
     let url = `${this.baseUri}/read/${id}`;
     return this.http.get(url, { headers: this.headers }).pipe(
       map((res: Response) => {
@@ -52,7 +52,7 @@ export class ApiService {
   }
 
   // Delete Marsupilami
-  deleteMarsupilami(id): Observable<any> {
+  deleteMarsupilami(id: string): Observable<any> {
     let url = `${this.baseUri}/delete/${id}`;
     return this.http.delete(url, { headers: this.headers }).pipe(
       catchError(this.errorMgmt)
@@ -61,6 +61,20 @@ export class ApiService {
 
   addFriend(data): Observable<any> {
     let url = `${this.baseUri}/addfriend/${this.marsu.id}`;
+    return this.http.put(url, data, { headers: this.headers }).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+
+  getFriendsList(id: string): Observable<any> {
+    let url = `${this.baseUri}/getfriends/${id}`;
+    return this.http.get(url, { headers: this.headers }).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+
+  removeFriend(data): Observable<any> {
+    let url = `${this.baseUri}/removefriend/${this.marsu.id}`;
     return this.http.put(url, data, { headers: this.headers }).pipe(
       catchError(this.errorMgmt)
     );

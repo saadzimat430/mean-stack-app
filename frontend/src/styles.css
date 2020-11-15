@@ -16,7 +16,7 @@ body {
   position: absolute;
   background-color: #f9f9f9;
   min-width: 80px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   padding: 12px 16px;
   z-index: 1;
 }
@@ -42,9 +42,9 @@ body {
 #registerForm {
   background-image: url("https://i.pinimg.com/originals/42/e2/34/42e234ae2473cfe83133bf004612477d.jpg");
   background-size: cover;
-  position: fixed; 
-  top: 0; 
-  left: 0; 
+  position: fixed;
+  top: 0;
+  left: 0;
 
   /* Preserve aspet ratio */
   min-width: 100%;
@@ -63,12 +63,10 @@ body {
 }
 
 .contenaire {
-  position: absolute;
-    top: 50%;
-    left: 50%;
-    -moz-transform: translateX(-50%) translateY(-50%);
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
+  position: relative;
+  margin-top: 100px;
+  max-width: 50%;
+  left: 25%;
 }
 
 ul {
