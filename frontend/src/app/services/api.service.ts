@@ -60,9 +60,6 @@ export class ApiService {
   }
 
   addFriend(data): Observable<any> {
-    console.log("Trying to add friend...");
-    console.log(`Online user ID is ${this.marsu.id}`);
-
     let url = `${this.baseUri}/addfriend/${this.marsu.id}`;
     return this.http.put(url, data, { headers: this.headers }).pipe(
       catchError(this.errorMgmt)

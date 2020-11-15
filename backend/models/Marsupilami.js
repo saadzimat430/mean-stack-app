@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 let Marsupilami = new Schema({
     login: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
