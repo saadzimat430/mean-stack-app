@@ -87,22 +87,21 @@ marsupilamiRoute.route('/getfriends/:id').get(async (req, res) => {
 
 })
 
-marsupilamiRoute.route('removefriend/:id').put(async (req, res, next) => {
+marsupilamiRoute.route('/removefriend/:id').put(async (req, res) => {
     const marsu = await Marsupilami.findById(req.params.id);
 
     const index = await marsu.friends.indexOf(req.body.id);
     if (index > -1) {
         await marsu.friends.splice(index, 1);
+    } else {
+        return res.status(400).json({
+            msg: "Ce marsupilami n'est pas votre ami."
+        });
     }
-
-    res.send(marsu.friends);
-    res.send(req.body.id);
 
     await marsu.save();
 
-    // return res.send(marsu);
-
-    return next(marsu.friends);
+    return res.status(200);
 })
 
 marsupilamiRoute.route('/delete/:id').delete((req, res, next) => {
