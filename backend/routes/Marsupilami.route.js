@@ -5,6 +5,9 @@ const db = require('../db/db');
 const mongoose = require('mongoose');
 
 let Marsupilami = require('../models/Marsupilami');
+const {
+    json
+} = require('body-parser');
 
 marsupilamiRoute.route('/create').post((req, res, next) => {
     Marsupilami.create(req.body, (error, data) => {
@@ -48,15 +51,58 @@ marsupilamiRoute.route('/update/:id').put((req, res, next) => {
     })
 })
 
-marsupilamiRoute.route('/addfriend/:id').put(async (req, res, next) => {
+marsupilamiRoute.route('/addfriend/:id').put(async (req, res) => {
     const marsu = await Marsupilami.findById(req.params.id);
 
-    friend = await Marsupilami.findById(req.body.id);
+    let friend = await Marsupilami.findById(req.body.id);
 
-    marsu.friends.push(friend);
+    if (!marsu.friends.includes(friend.id)) {
+        await marsu.friends.push(friend);
+    }
+
     await marsu.save();
 
-    return res.send(marsu);
+    let awt = await Marsupilami.findById(marsu.friends[1]);
+
+    return res.json(marsu);
+})
+
+marsupilamiRoute.route('/getfriends/:id').get(async (req, res) => {
+    const marsu = await Marsupilami.findById(req.params.id);
+    let arr = [];
+    let data = {};
+
+    for (let i = 0; i < marsu.friends.length; i++) {
+        let marsu_ = await Marsupilami.findById(marsu.friends[i]);
+        data = {
+            login: marsu_.login,
+            race: marsu_.race,
+            famille: marsu_.famille,
+            nourriture: marsu_.nourriture
+        }
+        await arr.push(data);
+    }
+
+    return res.send(arr);
+
+})
+
+marsupilamiRoute.route('removefriend/:id').put(async (req, res, next) => {
+    const marsu = await Marsupilami.findById(req.params.id);
+
+    const index = await marsu.friends.indexOf(req.body.id);
+    if (index > -1) {
+        await marsu.friends.splice(index, 1);
+    }
+
+    res.send(marsu.friends);
+    res.send(req.body.id);
+
+    await marsu.save();
+
+    // return res.send(marsu);
+
+    return next(marsu.friends);
 })
 
 marsupilamiRoute.route('/delete/:id').delete((req, res, next) => {

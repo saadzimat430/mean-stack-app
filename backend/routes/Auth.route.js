@@ -2,12 +2,11 @@ const express = require("express");
 const {
     check,
     validationResult
-} = require("express-validator/check");
+} = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const authRoute = express.Router();
 const auth = require('../middleware/Auth');
-let cookieParser = require('cookie-parser');
 
 let Marsupilami = require('../models/Marsupilami');
 

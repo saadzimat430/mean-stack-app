@@ -3,12 +3,12 @@ let express = require('express'),
     mongoose = require('mongoose'),
     cors = require('cors'),
     bodyParser = require('body-parser'),
-    dbConfig = require('./db/db'),
-    cookieParser = require('cookie-parser');
+    dbConfig = require('./db/db');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(dbConfig.db, {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 }).then(() => {
         console.log('Connexion réussie')
     },
@@ -20,14 +20,13 @@ mongoose.connect(dbConfig.db, {
 const marsupilamiRoute = require('../backend/routes/Marsupilami.route');
 const authRoute = require('../backend/routes/Auth.route');
 const app = express();
-app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'dist/appartoo')));
-app.use('/', express.static(path.join(__dirname, 'dist/appartoo')));
+// app.use(express.static(path.join(__dirname, 'dist/appartoo')));
+// app.use('/', express.static(path.join(__dirname, 'dist/appartoo')));
 app.use('/api', marsupilamiRoute);
 app.use('/auth', authRoute);
 
