@@ -11,8 +11,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from './services/authentication.service';
 import { CommonModule } from '@angular/common';
+import { CreatefriendComponent } from './components/createfriend/createfriend.component';
 
 const routes: Routes = [
+  { path: 'createfriend', component: CreatefriendComponent },
   { path: 'friends', component: FriendsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -26,7 +28,8 @@ const routes: Routes = [
     RegisterComponent,
     LoginComponent,
     MeComponent,
-    FriendsComponent
+    FriendsComponent,
+    CreatefriendComponent
   ],
   imports: [
     RouterModule,

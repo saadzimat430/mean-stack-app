@@ -66,6 +66,13 @@ export class ApiService {
     );
   }
 
+  createFriend(data): Observable<any> {
+    let url = `${this.baseUri}/createfriend/${this.marsu.id}`;
+    return this.http.post(url, data).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+
   getFriendsList(id: string): Observable<any> {
     let url = `${this.baseUri}/getfriends/${id}`;
     return this.http.get(url, { headers: this.headers }).pipe(

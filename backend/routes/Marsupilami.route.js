@@ -3,6 +3,7 @@ const marsupilamiRoute = express.Router();
 const auth = require('../middleware/Auth');
 const db = require('../db/db');
 const mongoose = require('mongoose');
+const bcrypt = require("bcryptjs");
 
 let Marsupilami = require('../models/Marsupilami');
 const {
@@ -51,7 +52,7 @@ marsupilamiRoute.route('/update/:id').put((req, res, next) => {
     })
 })
 
-marsupilamiRoute.route('/addfriend/:id').put(async (req, res) => {
+marsupilamiRoute.route('/addfriend/:id').put(async(req, res) => {
     const marsu = await Marsupilami.findById(req.params.id);
 
     let friend = await Marsupilami.findById(req.body.id);
@@ -62,12 +63,10 @@ marsupilamiRoute.route('/addfriend/:id').put(async (req, res) => {
 
     await marsu.save();
 
-    let awt = await Marsupilami.findById(marsu.friends[1]);
-
     return res.json(marsu);
 })
 
-marsupilamiRoute.route('/getfriends/:id').get(async (req, res) => {
+marsupilamiRoute.route('/getfriends/:id').get(async(req, res) => {
     const marsu = await Marsupilami.findById(req.params.id);
     let arr = [];
     let data = {};
@@ -88,7 +87,7 @@ marsupilamiRoute.route('/getfriends/:id').get(async (req, res) => {
 
 })
 
-marsupilamiRoute.route('/removefriend/:id').put(async (req, res) => {
+marsupilamiRoute.route('/removefriend/:id').put(async(req, res) => {
     const marsu = await Marsupilami.findById(req.params.id);
 
     const index = await marsu.friends.indexOf(req.body.id);
@@ -115,6 +114,31 @@ marsupilamiRoute.route('/delete/:id').delete((req, res, next) => {
             })
         }
     })
+})
+
+marsupilamiRoute.route('/createfriend/:id').post(async(req, res, next) => {
+    var id = await mongoose.Types.ObjectId();
+    const salt = await bcrypt.genSalt(10);
+    const password = await bcrypt.hash(req.body.password, salt);
+
+    let friend = await new Marsupilami({
+        _id: id,
+        login: req.body.login,
+        password: password,
+        age: req.body.age,
+        famille: req.body.famille,
+        race: req.body.race,
+        nourriture: req.body.nourriture
+    });
+
+    await friend.save();
+
+    const marsu = await Marsupilami.findById(req.params.id);
+    let ami = await Marsupilami.findById(id);
+    await marsu.friends.push(ami);
+    await marsu.save();
+
+    return res.send(marsu);
 })
 
 module.exports = marsupilamiRoute;

@@ -1,27 +1,28 @@
 <div class="container" id="registerForm">
-  <div class="row justify-content-center">
-    <div class="topright" *ngIf="auth.isLoggedIn()">
-      <img class="profileImg" src="https://cdn140.picsart.com/239055468014202.jpg?type=webp&to=crop&r=256">
-      <br>
-      <div class="dropdown">{{ details.marsupilami.login }}
-        <div class="dropdown-content">
-          <a routerLinkActive="active" (click)="auth.logout()">
-            <p>Logout</p>
-          </a>
+    <div class="row justify-content-center">
+        <div class="topright" *ngIf="auth.isLoggedIn()">
+            <img class="profileImg" src="https://cdn140.picsart.com/239055468014202.jpg?type=webp&to=crop&r=256">
+            <br>
+            <div class="dropdown">{{ details.marsupilami.login }}
+                <div class="dropdown-content">
+                    <a routerLinkActive="active" (click)="auth.logout()">
+                        <p>Logout</p>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <div class="contenaire">
-      <h1 style="color: white; text-align: center;">Mes informations</h1>
-      <ul>
-        <li>Age: {{ details.marsupilami.age }}</li>
-        <li>Famille: {{ details.marsupilami.famille }}</li>
-        <li>Race: {{ details.marsupilami.race }}</li>
-        <li>Nourriture: {{ details.marsupilami.nourriture }}</li>
-      </ul>
-      <button class="buttonx" type="submit">Modifier mes informations</button>
-      <button routerLink="/friends" class="buttonx" type="submit">Ajouter un ami</button>
+        <div class="contenaire2">
+            <h1 style="color: white; text-align: center;">Mes informations</h1>
+            <ul>
+                <li>Age: {{ details.marsupilami.age }}</li>
+                <li>Famille: {{ details.marsupilami.famille }}</li>
+                <li>Race: {{ details.marsupilami.race }}</li>
+                <li>Nourriture: {{ details.marsupilami.nourriture }}</li>
+            </ul>
+            <button class="buttonx" type="submit">Modifier mes informations</button>
+            <button routerLink="/friends" class="buttonx" type="submit">Ajouter un ami</button>
+            <button routerLink="/createfriend" class="buttonx" type="submit">Ajouter un ami non inscrit</button>
+        </div>
     </div>
-  </div>
 </div>

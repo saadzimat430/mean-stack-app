@@ -2,7 +2,7 @@
     <div class="col-md-4 register-employee">
         <!-- form card register -->
         <div class="card-body">
-            <form [formGroup]="marsuForm" (ngSubmit)="onSubmit()">
+            <form [formGroup]="marsuForm" (ngSubmit)="createFriend()">
                 <div class="form-group">
                     <label id="formlabel" for="inputName">Login</label>
                     <input class="form-control" type="text" formControlName="login">
@@ -32,10 +32,10 @@
                 <div class="form-group">
                     <label id="formlabel" for="inputPassword3">Famille</label>
                     <select class="custom-select form-control" (change)="updateF($event.target.value)" formControlName="famille">
-            <option value="">Choose...</option>
-            <option *ngFor="let f of MarsuFamille" value="{{f}}">{{f}}
-            </option>
-          </select>
+                        <option value="">Choose...</option>
+                        <option *ngFor="let f of MarsuFamille" value="{{f}}">{{f}}
+                        </option>
+                    </select>
                     <!-- error -->
                     <div class="invalid-feedback" *ngIf="submitted && myForm.famille.errors?.required">
                         Veuillez choisir une famille.
@@ -45,27 +45,26 @@
                 <div class="form-group">
                     <label id="formlabel" for="inputPassword3">Race</label>
                     <select class="custom-select form-control" (change)="updateR($event.target.value)" formControlName="race">
-            <option value="">Choose...</option>
-            <option *ngFor="let r of MarsuRace" value="{{r}}">{{r}}
-            </option>
-          </select>
+                        <option value="">Choose...</option>
+                        <option *ngFor="let r of MarsuRace" value="{{r}}">{{r}}
+                        </option>
+                    </select>
                 </div>
 
                 <div class="form-group">
                     <label id="formlabel" for="inputPassword3">Nourriture</label>
                     <select class="custom-select form-control" (change)="updateN($event.target.value)" formControlName="nourriture">
-            <option value="">Choose...</option>
-            <option *ngFor="let n of nourriture" value="{{n}}">{{n}}
-            </option>
-          </select>
+                        <option value="">Choose...</option>
+                        <option *ngFor="let n of nourriture" value="{{n}}">{{n}}
+                        </option>
+                    </select>
                     <!-- error -->
                     <div class="invalid-feedback" *ngIf="submitted && myForm.nourriture.errors?.required">
                         Veuillez choisir une nourriture.
                     </div>
                 </div>
 
-                <button class="buttonx" type="submit">Sign Up</button>
-                <button routerLink="/login" class="buttonx" type="submit">Login</button>
+                <button class="buttonx" type="submit">CREATE FRIEND</button>
             </form>
 
         </div>

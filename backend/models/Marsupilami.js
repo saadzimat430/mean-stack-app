@@ -28,7 +28,7 @@ let Marsupilami = new Schema({
         default: Date.now()
     },
     friends: [
-        {type: Schema.Types.ObjectId, ref: 'Marsupilami'}
+        { type: Schema.Types.ObjectId, ref: 'Marsupilami' }
     ]
 }, {
     collection: 'marsupilamis'
